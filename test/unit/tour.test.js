@@ -38,7 +38,7 @@ describe('Tour model', () => {
 
         const errors = validation.errors;
         assert.equal(Object.keys(errors).length, 1);
-        assert.equal(errors.title.kind, ('required'));
+        assert.equal(errors.title.kind, 'required');
     });
 
     it('Requires min attendence is 1', () => {

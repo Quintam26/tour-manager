@@ -137,8 +137,17 @@ describe('Tour API', () => {
             });
     });
 
-    it.skip('Update a stop with number of attendees', () => {
+    
 
+    it('Update a stop with number of attendees', () => {
+        const data = { attendance: 150 };
+        return request
+            .put(`/api/tours/${tour._id}/stops/${tour.stops[0]._id}/attendance`)
+            .send(data)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.equal(body.stops[0].attendance, 150);
+            });
     });
 
 });
