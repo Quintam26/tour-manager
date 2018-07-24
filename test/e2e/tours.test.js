@@ -87,27 +87,7 @@ describe('Tour API', () => {
             .then(checkOk)
             .then(({ body }) => body);
     }
-
-    it('Adds a stop to a tour', () => {
-        const burningMan = {
-            location: {
-                city: 'El Paso',
-                state: 'Texas',
-                zip: 80514
-            },
-            weather: {
-                temperature: 80
-            },
-            attendance: 100
-        };
-
-        return addStop(tour, burningMan)
-            .then(stop => {
-                assert.isDefined(stop._id);
-                assert.equal(stop.title, burningMan.title);
-            });
-    });
-
+    
     it('Removes a stop from a tour', () => {
         const burningMan = {
             location: {
@@ -136,15 +116,38 @@ describe('Tour API', () => {
             });
     });
 
+    it('Adds a stop to a tour', () => {
+        const burningMan = {
+            location: {
+                city: 'El Paso',
+                state: 'Texas',
+                zip: 80514
+            },
+            weather: {
+                temperature: 80
+            },
+            attendance: 100
+        };
+
+        return addStop(tour, burningMan)
+            .then(stop => {
+                assert.isDefined(stop._id);
+                assert.equal(stop.title, burningMan.title);
+            });
+    });
+
+
     it('Update a stop with number of attendees', () => {
-        const data = { attendance: 150 };
+        const data = {
+            attendance: 150
+        };
         return request
             .put(`/api/tours/${tour._id}/stops/${tour.stops[0]._id}/attendance`)
             .send(data)
             .then(checkOk)
             .then(({ body }) => {
-                console.log('hhhhhhhhhh', body);
-                assert.equal(body.stops[0].attendance, 150);
+                console.log('hhhhhhhhhh', data);
+                assert.equal(body.stops[0].attendance, data.attendance);
             });
     });
 
