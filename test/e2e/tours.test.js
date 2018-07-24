@@ -123,7 +123,6 @@ describe('Tour API', () => {
 
         return addStop(tour, burningMan)
             .then(stop => {
-                console.log('stop', stop);
                 return request
                     .delete(`/api/tours/${tour._id}/stops/${stop._id}`);
             })
@@ -137,8 +136,6 @@ describe('Tour API', () => {
             });
     });
 
-    
-
     it('Update a stop with number of attendees', () => {
         const data = { attendance: 150 };
         return request
@@ -146,6 +143,7 @@ describe('Tour API', () => {
             .send(data)
             .then(checkOk)
             .then(({ body }) => {
+                console.log('hhhhhhhhhh', body);
                 assert.equal(body.stops[0].attendance, 150);
             });
     });
